@@ -1,0 +1,946 @@
+////////////////////////////////////////////////////
+//			Team 4470, TiGears 2016				  //
+//			RoboRio Control System				  //
+//					Members:					  //
+//			Christopher E Stevens	(CES)		  //
+//				   Kyle E Little	(KEL)		  //
+//				   Matt S Wimer		(MSW)         //
+//				  Suvir   Mehrotra  (SM)		  //
+// 			     Shivam M Shah		(SMS)		  //
+//				  Contact Info:					  //
+//			CES: onionchi@gmail.com 			  //
+//				 1(714)869-5321					  //
+//			KEL: aniranth@gmail.com				  //
+//				 1(714)504-8527				 	  //
+//			MSW: mattwimer1@gmail.com			  //
+//				 1(714)322-6212					  //
+//			SM:  suvir_blaze@yahoo.com			  //
+//				 1(714)905-6886					  //
+//			SMS: shivshah12698@gmail.com		  //
+//				 1(714)270-8066					  //
+////////////////////////////////////////////////////
+// CES:
+/**************************************************/
+/*    !!!!!!!!!!!!!!!NOTICE!!!!!!!!!!!!!!!!!!!    */
+/* ALL CODE WRITTEN _MUST_ FOLLOW THE STYLE GUIDE */
+/*		IF EVER IN DOUBT PLEASE ASK CES OR KEL	  */
+/*												  */
+/*	ALL COMMENTS DONE MUST BE _PRECEDED_ BY 	  */
+/*		 		COMMENTORS INITALS				  */
+/*												  */
+/*  	FOLLOW THE INSTANTIATION ORDER			  */
+/*	  FAILURE TO DO SO WASTES DAYS FIXING IT	  */
+/**************************************************/
+#include "WPILib.h"
+#include <stdio.h>
+#include <string.h>
+
+// CES: Code compile options #defines
+#define USING_DIRECT_TALLON_CONTROL
+#define SEND_VIDEO_TO_DS
+#define CAMERA
+#define PROCESS_IMAGE
+#ifndef CAMERA
+#ifdef SEND_VIDEO_TO_DS
+#undef SEND_VIDEO_TO_DS
+#endif
+#endif
+
+// CES: Universal constants
+#define PI 3.141592653
+#define NULL_ENCODER_TARGET -1
+#define MOTOR_EXPIRATION 0.1
+#define REVERSE_DIRECTION_DEFAULT 1
+#define REVERSE_DIRECTION_DIR_REVERSED -1
+#define REVERSE_DIRECTION_DIR_NOT_REVERSED 1
+#define MAX_MOTOR_POWER 1.0
+#define MOTOR_UNPOWERED 0.0
+
+// CES: Right joystick button number #defines
+#define RJSTK_DS_SLOT_NUM 0
+#define RJSTK_TOGGLE_GRIPPER 1
+#define RJSTK_RAISE_ARM 2
+#define RJSTK_LOWER_ARM 3
+#define RJSTK_MANUAL_PICKUP 4
+#define RJSTK_AUTO_PICKUP 5
+#define RJSTK_CAPTURE_CONSTANT 9
+
+// CES: Switchbox switch number #defines
+#define SBOX_DS_SLOT_NUM 1
+#define START_GRIPPER_DOWN 2
+#define SBOX_SQURARED_INPUTS 3
+#define SBOX_REVERSE_DIRECTION 4
+#define SBOX_MANTAIN_POSITION 5
+#define SBOX_TANK_ARCADE 6
+#define SBOX_AUTO_ON 7
+#define SBOX_AUTO_HIGH_POWER 8
+#define AUTO_MODE_BUTTON_A 11
+#define AUTO_MODE_BUTTON_B 12
+
+// CES: Left joystick button number #defines
+#define LJSTK_DS_SLOT_NUM 2
+
+// CES: Solenoid channel #defines
+//#define ARM_LIFT_SINGLE_ACTING
+
+#define ARM_ROTATE_SOLENOID_CHANNEL_L 0
+#define ARM_ROTATE_SOLENOID_CHANNEL_R 1
+#define ARM_LIFT_SOLENOID_CHANNEL_L 2
+#define ARM_LIFT_SOLENOID_CHANNEL_R 3
+#define ARM_RELEASE_SOLENOID_CHANNEL_L 4
+#define ARM_RELEASE_SOLENOID_CHANNEL_R 5
+
+// CES: Solenoid command value #defines
+#define SOLENOID_OFF DoubleSolenoid::kOff
+#define SOLENOID_FORWARD DoubleSolenoid::kForward
+#define SOLENOID_REVERSE DoubleSolenoid::kReverse
+
+// SM: Motor Power #defines
+#define MAX_POWER 1
+#define MIN_POWER (-1 * MAX_POWER)
+#define LEFT_DRIVE_CHANNEL 0
+#define RIGHT_DRIVE_CHANNEL 1
+
+// SM: Encoder #defines
+#define ENCODER_MAINTAIN_BUFFER 200
+#define LEFT_PROPORTIONAL_CONSTANT 1
+#define RIGHT_PROPORTIONAL_CONSTANT 1
+#define LEFT_ENCODER_DIRECTION 1
+#define RIGHT_ENCODER_DIRECTION 1
+
+// Matt: Light v. Darkness Threshhold
+#define LIGHT_THRESHHOLD 600
+#define BYTES_PER_PIXEL 4
+#define PIXEL_INCREMENT 2
+#define IMAGE_START 28000
+#define NUM_ROWS 21
+//#define WIPE_CONSTANT
+
+// SMS: Temporary values
+#define RIGHT_ENCODER_FIRST_CHANNEL 0
+#define RIGHT_ENCODER_SECOND_CHANNEL 1
+#define LEFT_ENCODER_FIRST_CHANNEL 3
+#define LEFT_ENCODER_SECOND_CHANNEL 4
+
+// SM: Autonomous #defines
+#define LEFT_AUTONOMOUS_DRIVE_POWER -.5
+#define RIGHT_AUTONOMOUS_DRIVE_POWER -.5
+#define LEFT_AUTONOMOUS_DRIVE_POWER_INCREASE -.5
+#define RIGHT_AUTONOMOUS_DRIVE_POWER_INCREASE -.5
+#define AUTONOMOUS_TIME_INCREASE 2.0
+
+#define MAINTAIN_POSITION_JOYSTICK_RANGE .005
+
+#define VISION_DELAY_TIME 2
+#define ARM_LIFT_DELAY 1.0
+#define GRIP_OFFSET .25
+
+#define BLUE_PIXEL 0
+#define GREEN_PIXEL 1
+#define RED_PIXEL 2
+#define HANDLE_END_BYTES 3
+#define IMAGE_THRESHOLD_VALUE 34000
+
+#define RINGLIGHT_I2C_DEVICE_ADDR 0x10
+
+enum DRIVE_FORWARD
+{
+	AUTONOMOUS_START_DRIVING_FORWARD,
+	AUTONOMOUS_DRIVE_FORWARD_STATE,
+	AUTONOMOUS_DRIVE_FORWARD_LONGER_STATE
+};
+#define AUTONOMOUS_DRIVE_TIME 2.5
+
+class Robot: public IterativeRobot
+{
+private:
+	// CES: Driver station and other default FIRST declarations
+	LiveWindow *lw = LiveWindow::GetInstance();
+	SendableChooser *chooser;
+	Encoder right_encoder;
+	Encoder left_encoder;
+	Timer timer;
+	const std::string autoNameDefault = "Default";
+	const std::string autoNameCustom = "My Auto";
+	std::string autoSelected;
+	// CES: user control object declarations
+	Joystick right_joystick;
+	Joystick switch_box;
+	Joystick left_joystick;
+	// CES: robot command (motor, solenoids, etc.) declarations
+#ifndef USING_DIRECT_TALLON_CONTROL
+	RobotDrive robot_drive;
+#else
+	Talon left_motor;
+	Talon right_motor;
+#endif
+	DoubleSolenoid arm_rotate_solenoid;
+	DoubleSolenoid arm_lift_solenoid;
+	bool is_change;
+	float timer_start_lower_solenoid;
+
+
+	DoubleSolenoid release_ball_solenoid;
+	DoubleSolenoid::Value release_ball_value;
+	bool release_ball_solenoid_value;
+	bool release_ball_toggled;
+#ifdef CAMERA
+	// CES: Vision object declarations
+	USBCamera vis_camera;		//CES: Camera plugged into roborio
+	IMAQdxSession session;
+	Image *vis_image;			//CES: Pointer to the image taken by camera
+	IMAQdxError imaqError;
+	int red_test;
+	int green_test;
+	int blue_test;
+	int prev_pixel_count;
+	int not_ball_pixel;
+#endif
+	//Matt: Break-beam sensor
+	AnalogInput boulderSensor;
+	//DigitalOutput lightState;
+	//KEL: Declarations for Primitives
+	float left_motor_power; 	//CES: Variable that stores the value to be used to set the left motor's power
+	float right_motor_power; 	//CES: Variable that stores the value to be used to set the right motor's power
+	float left_autonomous_motor_power;
+	float right_autonomous_motor_power;
+	float timer_starting_position;
+	int reverse_direction; 		//CES: Int that is used in code to choose the direction the front to the robot is
+	int auto_mode;
+	int auto_state;
+	bool auto_on;
+	int left_encoder_value;
+	int right_encoder_value;
+	int left_encoder_starting_value;
+	int right_encoder_starting_value;
+	int prev_left_encoder_value;
+	int prev_right_encoder_value;
+	int right_encoder_target;
+	int left_encoder_target;
+	bool maintain_pos_vals_set;
+	bool gripper_infront_bot;
+	bool is_cycle_one;
+	int increment_num;
+	int red_cycle;
+	int green_cycle;
+	int blue_cycle;
+	double img_timer_start;
+	int comparison_constant;
+	int prev_change;
+	bool comparison_constant_set;
+	bool pickup_start;
+	int pickup_start_time;
+	int time_gripper_move;
+	char temp_string[26];
+	DoubleSolenoid::Value gripper_command;
+	DoubleSolenoid::Value release_command;
+	DoubleSolenoid::Value rotate_command;
+	int img_start_point;
+	int img_start_basis;
+	FILE * comparison_const_file;
+	char * file_buffer;
+	size_t file_result;
+	bool file_access_suscess;
+	I2C ring_light_I2C_connection;
+public:
+	Robot():
+		chooser(0),
+		right_encoder(RIGHT_ENCODER_FIRST_CHANNEL,RIGHT_ENCODER_SECOND_CHANNEL),
+		left_encoder(LEFT_ENCODER_FIRST_CHANNEL,LEFT_ENCODER_SECOND_CHANNEL),
+		timer(),
+		right_joystick(RJSTK_DS_SLOT_NUM),
+		switch_box(SBOX_DS_SLOT_NUM),
+		left_joystick(LJSTK_DS_SLOT_NUM),
+#ifndef USING_DIRECT_TALLON_CONTROL
+		robot_drive(LEFT_DRIVE_CHANNEL, RIGHT_DRIVE_CHANNEL),
+#else
+		left_motor(LEFT_DRIVE_CHANNEL),
+		right_motor(RIGHT_DRIVE_CHANNEL),
+#endif
+		arm_rotate_solenoid(ARM_ROTATE_SOLENOID_CHANNEL_L, ARM_ROTATE_SOLENOID_CHANNEL_R),
+		arm_lift_solenoid(ARM_LIFT_SOLENOID_CHANNEL_L, ARM_LIFT_SOLENOID_CHANNEL_R),
+		is_change(false),
+		timer_start_lower_solenoid(0),
+		release_ball_solenoid(ARM_RELEASE_SOLENOID_CHANNEL_L, ARM_RELEASE_SOLENOID_CHANNEL_R),
+		release_ball_value(SOLENOID_OFF),
+		release_ball_solenoid_value(SOLENOID_OFF),
+		release_ball_toggled(false),
+#ifdef CAMERA
+		vis_camera("cam0",false),
+		session(),
+		vis_image(),
+		imaqError(),
+		red_test(0),
+		green_test(0),
+		blue_test(0),
+		prev_pixel_count(0),
+		not_ball_pixel(0),
+#endif
+		boulderSensor(0),
+		//lightState(0),
+		left_motor_power(0),
+		right_motor_power(0),
+		left_autonomous_motor_power(0),
+		right_autonomous_motor_power(0),
+		timer_starting_position(0),
+		reverse_direction(REVERSE_DIRECTION_DEFAULT),
+		auto_mode(AUTONOMOUS_DRIVE_FORWARD_STATE),
+		auto_state(0),
+		auto_on(false),
+		left_encoder_value(0),
+		right_encoder_value(0),
+		left_encoder_starting_value(0),
+		right_encoder_starting_value(0),
+		prev_left_encoder_value(0),
+		prev_right_encoder_value(0),
+		right_encoder_target(NULL_ENCODER_TARGET),
+		left_encoder_target(NULL_ENCODER_TARGET),
+		maintain_pos_vals_set(false),
+		gripper_infront_bot(false),
+		is_cycle_one(true),
+		increment_num(0),
+		red_cycle(0),
+		green_cycle(0),
+		blue_cycle(0),
+		img_timer_start(0),
+		comparison_constant(0),
+		prev_change(0),
+		comparison_constant_set(false),
+		pickup_start(false),
+		pickup_start_time(0),
+		time_gripper_move(0),
+		temp_string(),
+		gripper_command(DoubleSolenoid::kOff),
+		release_command(DoubleSolenoid::kOff),
+		rotate_command(SOLENOID_REVERSE),
+		img_start_point(IMAGE_START),
+		img_start_basis(0),
+		comparison_const_file(NULL),
+		file_buffer(NULL),
+		file_result(),
+		file_access_suscess(true),
+		ring_light_I2C_connection(I2C::kOnboard, RINGLIGHT_I2C_DEVICE_ADDR){
+#ifndef USING_DIRECT_TALLON_CONTROL
+		robot_drive.SetExpiration(MOTOR_EXPIRATION);
+#else
+		left_motor.SetExpiration(MOTOR_EXPIRATION);
+		right_motor.SetExpiration(MOTOR_EXPIRATION);
+#endif
+	}
+private:
+	void RobotInit()
+	{
+		timer.Start();
+		float robo_init_start_time = timer.Get();
+		//printf("Compiled on 26-Jun-2016 19:24\n");
+		printf("Complied on %s %s\n", __DATE__, __TIME__);
+		chooser = new SendableChooser();
+		chooser->AddDefault((char*)&autoNameDefault, (void*)&autoNameDefault);
+		chooser->AddObject((char*)&autoNameCustom, (void*)&autoNameCustom);
+		SmartDashboard::PutData("Auto Modes", chooser);
+
+#ifdef CAMERA
+		// create an image
+		vis_image = imaqCreateImage(IMAQ_IMAGE_RGB, 0);
+		//the camera name (ex "cam0") can be found through the roborio web interface
+		vis_camera.OpenCamera();
+		vis_camera.StartCapture();
+		vis_camera.SetExposureManual(0);
+		//		imaqError = IMAQdxOpenCamera("cam0", IMAQdxCameraControlModeController, &session);
+		//		if(imaqError != IMAQdxErrorSuccess) {
+		//			DriverStation::ReportError("IMAQdxOpenCamera error: " + std::to_string((long)imaqError) + "\n");
+		//		}
+		//		imaqError = IMAQdxConfigureGrab(session);
+		//		if(imaqError != IMAQdxErrorSuccess) {
+		//			DriverStation::ReportError("IMAQdxConfigureGrab error: " + std::to_string((long)imaqError) + "\n");
+		//		}
+#endif
+
+		printf("RobotInit took %f\n",(timer.Get() - robo_init_start_time));
+	}
+
+	/**
+	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
+	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
+	 * Dashboard, remove all of the chooser code and uncomment the GetString line to get the auto name from the text box
+	 * below the Gyro
+	 *
+	 * You can add additional auto modes by adding additional comparisons to the if-else structure below with additional strings.
+	 * If using the SendableChooser make sure to add them to the chooser code above as well.
+	 */
+	void AutonomousInit()
+	{
+		autoSelected = *((std::string*)chooser->GetSelected());
+		//std::string autoSelected = SmartDashboard::GetString("Auto Selector", autoNameDefault);
+		std::cout << "Auto selected: " << autoSelected << std::endl;
+		if(autoSelected == autoNameCustom){
+			//Custom Auto goes here
+		} else {
+			//Default Auto goes here
+		}
+		timer_starting_position = timer.Get();
+		arm_rotate_solenoid.Set(SOLENOID_REVERSE);
+		gripper_infront_bot = false;
+		auto_state = 0;
+		SwitchBoxHandler(&switch_box, &right_joystick, &left_joystick,
+				&left_motor_power, &right_motor_power,
+				&right_encoder, &left_encoder, &right_encoder_target, &left_encoder_target,
+				&maintain_pos_vals_set, &reverse_direction,
+				&auto_on, &auto_mode, &rotate_command);
+	} //AutonomousInit
+
+	void AutonomousPeriodic()
+	{
+		//CES: Default auto code from project generation
+		//		if(autoSelected == autoNameCustom){
+		//			//Custom Auto goes here
+		//		} else {
+		//			//Default Auto goes here
+		//		}
+
+		if(auto_on) {
+			switch(auto_mode) {
+			case AUTONOMOUS_DRIVE_FORWARD_STATE:
+				SmartDashboard::PutString("DB/String 1", "Autonomous Driving Forward");
+				DriveForward();
+				break;
+				//		case : none:	//CES: PLEASE MARK WHO LEAVES THE COMMENT. Also, what is this?
+				//		default:
+				//			break;
+			}
+			left_motor.Set(left_autonomous_motor_power * reverse_direction);
+			right_motor.Set(right_autonomous_motor_power * reverse_direction);
+		}
+	} //AutonomousPeriodic
+
+	void TeleopInit()
+	{
+		char* substr;
+		char* substr_end;
+		pickup_start = false;
+#ifdef WIPE_CONSTANT
+		comparison_constant = 0;
+#endif
+		sprintf(temp_string,"Complied on: %s", __DATE__);
+		SmartDashboard::PutString("DB/String 4", temp_string);
+		sprintf(temp_string, "at %s", __TIME__);
+		SmartDashboard::PutString("DB/String 9", temp_string);
+		//arm_rotate_solenoid_command_value = SOLENOID_OFF;
+		//arm_rotate_solenoid.Set(SOLENOID_REVERSE);
+#ifdef CAMERA
+		IMAQdxStartAcquisition(session);
+#endif
+		arm_rotate_solenoid.Set(SOLENOID_REVERSE);
+		//arm_lift_solenoid.Set(SOLENOID_FORWARD);
+		gripper_infront_bot = false;
+
+		// Read comparison_constant from file - TODO: move to RobotInit()
+		//		file_result = fread (file_buffer,sizeof(char),l_file_size,comparison_const_file);
+		//		// TODO: handle storing multiple variables.
+		//		strncpy(substr, file_buffer, strcspn("\n",file_buffer));
+		const char * dir = "/home/lvuser/vision_vals.txt";
+		OpenFile(&file_buffer, dir, &comparison_const_file);
+		comparison_constant = strtol(substr, &substr_end, 10);
+//		OpenFile();
+	} //TeleopInit
+
+	void TeleopPeriodic()
+	{
+		//		unsigned char r_light_data[3] = {0xFF,0,0}; //CES: 0xRRGGBB /
+		//RR:00-FF GG:00-FF BB:00-FF
+		unsigned char r_light_data[4] = {0x55,0xAA,0xAA,0xAA};
+		ring_light_I2C_connection.WriteBulk(r_light_data,0x10);
+		SwitchBoxHandler(&switch_box, &right_joystick, &left_joystick,
+				&left_motor_power, &right_motor_power,
+				&right_encoder, &left_encoder, &right_encoder_target, &left_encoder_target,
+				&maintain_pos_vals_set, &reverse_direction,
+				&auto_on, &auto_mode, &rotate_command);
+#ifdef CAMERA
+		vis_camera.GetImage(vis_image);
+#ifdef PROCESS_IMAGE
+		AutomaticBallDetection();
+#endif
+		CameraServer::GetInstance()->SetImage(vis_image);
+#endif
+		sprintf(temp_string, "Light Value: %d", boulderSensor.GetValue());
+		SmartDashboard::PutString("DB/String 0", temp_string);
+		//CES and MAM: Allows user to switch between arcade and tank drive using the z-axis of the joystick
+		ButtonPressedHandler(&right_joystick,&release_command,&rotate_command,
+				&gripper_command,&time_gripper_move);
+
+
+#ifndef USING_DIRECT_TALLON_CONTROL
+		robot_drive.SetLeftRightMotorOutputs(-left_motor_power, right_motor_power);
+#else
+		left_motor.Set(left_motor_power * reverse_direction);
+		right_motor.Set(right_motor_power * reverse_direction);
+#endif
+		release_ball_solenoid.Set(release_command);
+		arm_lift_solenoid.Set(gripper_command);
+		arm_rotate_solenoid.Set(rotate_command);
+		is_cycle_one=false;
+	} //TeleopPeriodic
+
+	void TestPeriodic()
+	{
+		lw->Run();
+	}
+
+	///////////////////////////////////////////////////////////////////////////////////////
+	//                                 Team Functions Below                              //
+	///////////////////////////////////////////////////////////////////////////////////////
+
+	void ButtonPressedHandler(Joystick *r_joystick, DoubleSolenoid::Value *release_command_value,
+			DoubleSolenoid::Value *rotate_command_value, DoubleSolenoid::Value *gripper_command_value,
+			int *time_gripper_move_value)
+	{
+		if((*r_joystick).GetRawButton(RJSTK_TOGGLE_GRIPPER)){
+			*release_command_value = SOLENOID_REVERSE;
+		} else {
+			*release_command_value = SOLENOID_FORWARD;
+		}
+
+		if((*r_joystick).GetRawButton(RJSTK_LOWER_ARM)){
+			*rotate_command_value = SOLENOID_FORWARD;
+			*time_gripper_move_value = timer.Get();
+			gripper_infront_bot = true;
+		} else if ((*r_joystick).GetRawButton(RJSTK_RAISE_ARM) || !gripper_infront_bot){
+			*rotate_command_value = SOLENOID_REVERSE;
+			gripper_infront_bot = false;
+		}
+		if(!(*r_joystick).GetRawButton(RJSTK_AUTO_PICKUP)){
+			if((*r_joystick).GetRawButton(RJSTK_MANUAL_PICKUP) && gripper_infront_bot){
+				*gripper_command_value = SOLENOID_REVERSE;
+				*release_command_value = SOLENOID_REVERSE;
+			} else {
+				*gripper_command_value = SOLENOID_FORWARD;
+				if(!(*r_joystick).GetRawButton(RJSTK_TOGGLE_GRIPPER)){
+					*release_command_value = SOLENOID_FORWARD;
+				}
+			}
+		}
+		if((*r_joystick).GetRawButton(11)) {
+			printf("Trying WriteToFile\n");
+			const char *buff = "Chris Was Here.";
+			const char * dir = "/home/lvuser/vision_vals.txt";
+			WriteToFile(buff, dir);
+		}
+	} //ButtonPressedHandler
+
+
+	void SwitchBoxHandler(Joystick *sw_box, Joystick *r_joystick, Joystick *l_joystick,
+			float *l_motor_power, float *r_motor_power,
+			Encoder *r_encoder, Encoder *l_encoder, int *r_encoder_target, int *l_encoder_target,
+			bool *maintain_position_vals_set, int *reverse_direction_value,
+			bool *auto_on_value, int *auto_mode_value, DoubleSolenoid::Value *rotate_command_value)
+	{
+		if((*sw_box).GetRawButton(START_GRIPPER_DOWN)){
+			*rotate_command_value = SOLENOID_FORWARD;
+		}
+		if ((*sw_box).GetRawButton(SBOX_TANK_ARCADE)) {
+			SmartDashboard::PutString("DB/String 1", "Tank Drive");
+			TankDrive4470((*r_joystick).GetY(), (*l_joystick).GetY(), l_motor_power,
+					r_motor_power, (*sw_box).GetRawButton(SBOX_SQURARED_INPUTS));
+			if((*sw_box).GetRawButton(SBOX_MANTAIN_POSITION) &&
+					WithinRange((*l_joystick).GetY(), MAINTAIN_POSITION_JOYSTICK_RANGE) &&
+					WithinRange((*l_joystick).GetY(), MAINTAIN_POSITION_JOYSTICK_RANGE) ) {
+				if(!maintain_pos_vals_set) {
+					*r_encoder_target = (*r_encoder).GetRaw();
+					*l_encoder_target = (*l_encoder).GetRaw();
+					maintain_pos_vals_set = true;
+				}
+				MaintainPosition(*r_encoder_target, *l_encoder_target, (*r_encoder).GetRaw(),
+						(*l_encoder).GetRaw(), l_motor_power, r_motor_power);
+			}
+		} else {
+			ArcadeDrive4470((*r_joystick).GetY(),
+					(*r_joystick).GetX(), l_motor_power,
+					r_motor_power, (*sw_box).GetRawButton(SBOX_SQURARED_INPUTS));
+			if((*sw_box).GetRawButton(SBOX_MANTAIN_POSITION)
+					&& WithinRange((*r_joystick).GetY(), MAINTAIN_POSITION_JOYSTICK_RANGE)
+					&& WithinRange((*r_joystick).GetX(), MAINTAIN_POSITION_JOYSTICK_RANGE)) {
+				if(!maintain_pos_vals_set) {
+					*r_encoder_target = (*r_encoder).GetRaw();
+					*l_encoder_target = (*l_encoder).GetRaw();
+					maintain_pos_vals_set = true;
+				}
+				MaintainPosition(*r_encoder_target, *l_encoder_target, (*r_encoder).GetRaw(),
+						(*l_encoder).GetRaw(), l_motor_power, r_motor_power);
+
+			}
+		}
+		if((*sw_box).GetRawButton(SBOX_REVERSE_DIRECTION)) {
+			reverse_direction = REVERSE_DIRECTION_DIR_REVERSED;
+		} else {
+			reverse_direction = REVERSE_DIRECTION_DIR_NOT_REVERSED;
+		}
+		*auto_on_value = (*sw_box).GetRawButton(SBOX_AUTO_ON);
+		*auto_mode_value = (*sw_box).GetRawButton(AUTO_MODE_BUTTON_A)?1:0 + (*sw_box).GetRawButton(AUTO_MODE_BUTTON_B)?2:0;
+	} //SwitchBoxHandler
+
+	int GetSpeedStartPoint(float joystickY, int image_start_basis,ImageInfo* vis_info)
+	{
+//		float friction_constant = -0.21;
+//		float scaling_factor = 1/(1+friction_constant);
+//		float scaledY = (joystickY-friction_constant)*scaling_factor;
+//		sprintf(temp_string, "JoyStickY: %f", joystickY);
+//		SmartDashboard::PutString("DB/String 1", temp_string);
+//		if(scaledY >= 0){
+//			return image_start_basis*BYTES_PER_PIXEL;
+//		}
+//		int value = ((pow(1.0 +(scaledY),2)*image_start_basis) * BYTES_PER_PIXEL);
+//		return value - value%4;
+		if (joystickY > -0.35 && joystickY <= 1){
+			return image_start_basis + 28*vis_info->xRes;
+		}else if (joystickY <= -0.35 && joystickY > -0.50){
+			return image_start_basis +19*vis_info->xRes;
+		}else if (joystickY <= -0.50 && joystickY > -0.75){
+			return image_start_basis +10*vis_info->xRes;
+		}else if (joystickY <= -0.75 && joystickY >= -1.0){
+			return image_start_basis +1*vis_info->xRes;
+		}else{
+			return image_start_basis + 28*vis_info->xRes;
+		}
+	}
+
+	bool WithinRange (float value, float bound)
+	{
+		return value > -bound && value < bound;
+	}
+
+	int ReadNumberFromFile()
+	{
+		return 0;
+	}
+
+	bool OpenFile(char **read_into, const char *file_name, FILE **file)
+	{
+		char c;
+		printf("Attempted to open file\n");
+		// TODO: close file after processing contents - do not leave file open. /
+		//Re-open later if necessary.
+		float start_function_time = timer.Get();
+		*file = fopen(file_name,"r+");
+		if(*file == NULL) { //TODO: Ensure file reading cannot fail
+			printf("OpenFile: ERROR-File open failed.\n");
+		}else{
+			printf("File opened\n");
+		}
+		if(file != NULL) {
+			// prints file contents (for debugging purposes)
+			printf("Printing File contents.\n");
+			int counter = 0;
+			do
+			{
+				printf("do while part: %d.\n",counter);
+				c = fgetc(*file);
+				printf("character = (char)%c (int)%d\n",c,(int)c);
+				counter++;
+			} while (c != 0);
+			printf("Rewinding File.\n");
+			rewind (*file);
+
+			if(fseek (*file , 0 , SEEK_END)==0){
+				long l_file_size;
+				l_file_size = ftell (*file);
+				rewind (*file);
+				if(l_file_size != -1){
+					printf("Allocating memory for file buffer\n");
+					*read_into = (char*) malloc (8 * counter);
+					printf("sizeof(file_buffer) = %d\n",sizeof(read_into));
+					printf("number of char: %d\n",counter);
+				}
+			} else {
+				printf("Failed to find file size\n");
+				file_access_suscess = false;
+			}
+		}
+		printf("OpenFile took %.8fsec\n",(timer.Get() - start_function_time));
+		return file_access_suscess;
+	}
+
+	bool WriteToFile(const char *to_write, const char *file_name)
+	{
+		FILE *file = fopen(file_name,"w");
+		if(file == NULL) {
+			printf("WriteToFile: File open failed");
+			return false;
+		}
+		printf("File opened as write mode\n");
+		fwrite(to_write,sizeof(to_write),sizeof(char) * sizeof(to_write),file); //TODO: don't create file if fail
+		printf("File written: %s\nWritten as:\n%s\n", file_name, to_write);
+		fclose(file);
+		return true;
+	}
+
+	//TODO: Add option to leave gripper down when picking up
+	void AutomaticBallDetection()
+	{
+		if(gripper_infront_bot){
+			if(timer.Get()-time_gripper_move >= VISION_DELAY_TIME){
+				ImageInfo* vis_info = new ImageInfo;
+				imaqGetImageInfo(vis_image, vis_info);
+				char* print = (char*)vis_info->imageStart;
+				//		printf("xres: %d",vis_info->xRes);//xres = width
+				//		printf("yres: %d",vis_info->yRes);//yres = height
+
+				increment_num = 0;
+				img_timer_start = timer.Get();
+				img_start_basis = NUM_ROWS*vis_info->xRes*BYTES_PER_PIXEL;
+				printf("%d\n",img_start_basis);
+				img_start_point = GetSpeedStartPoint(right_joystick.GetY(), img_start_basis, vis_info);
+				print+=img_start_point;
+				for(int i = 0; i<((vis_info->yRes/(2*PIXEL_INCREMENT))*vis_info->xRes)*2.5; i++){
+					switch(increment_num){
+					case BLUE_PIXEL:
+						blue_cycle = *print;
+						blue_test += *print;
+						if(prev_change <= 0){
+							*print = 255;//Sets pixel to be all blue
+						}
+						increment_num++;
+						break;
+					case GREEN_PIXEL:
+						green_cycle = *print;
+						green_test += *print;
+						*print = 0;
+						increment_num++;
+						break;
+					case RED_PIXEL:
+						red_cycle = *print;
+						red_test += *print;
+						if(prev_change < 0){
+							*print = 255;//Sets pixel to be all red
+						}
+						increment_num++;
+						break;
+					case HANDLE_END_BYTES:
+						increment_num = 0;
+						print+=PIXEL_INCREMENT*BYTES_PER_PIXEL;
+						break;
+					}
+
+					print++;//B00G00R00Eff
+				}
+				printf("\nTime passed in loop: %f", timer.Get() - (img_timer_start));
+
+				sprintf(temp_string ,"Comparing: %d", comparison_constant>>8);
+				SmartDashboard::PutString("DB/String 2", temp_string);
+
+				if(!is_cycle_one && comparison_constant != 0){
+					prev_change = BallChange(green_test, comparison_constant);
+					if(!pickup_start && BallChange(green_test, comparison_constant) < 0){
+						if(right_joystick.GetRawButton(5)){
+							gripper_command = SOLENOID_REVERSE;
+							pickup_start_time = timer.Get();
+							pickup_start = true;
+							printf("Arm lowering\n");
+						}
+						SmartDashboard::PutString("DB/String 3", "Ball");
+					} else {
+						printf("No significant vision change staying where previously was\n");
+						SmartDashboard::PutString("DB/String 3", "No ball");
+					}
+					if(timer.Get()-pickup_start_time > ARM_LIFT_DELAY - GRIP_OFFSET
+							|| !right_joystick.GetRawButton(RJSTK_AUTO_PICKUP)){
+						release_command = SOLENOID_FORWARD;
+					}
+
+					if(timer.Get() - pickup_start_time >ARM_LIFT_DELAY
+							|| !right_joystick.GetRawButton(RJSTK_AUTO_PICKUP)){
+						gripper_command = SOLENOID_FORWARD;
+						if(!right_joystick.GetRawButton(RJSTK_AUTO_PICKUP)) {
+							pickup_start = false;
+						}
+					}
+				}
+
+				prev_pixel_count = green_test;
+				//prev_pixel_count = not_ball_pixel;
+				//				sprintf(temp_string, "pickup_start: %s", pickup_start?"true":"false");
+				//				SmartDashboard::PutString("DB/String 1", temp_string);
+				sprintf(temp_string, "Red Value: %d", red_test>>8);
+				SmartDashboard::PutString("DB/String 5", temp_string);
+				sprintf(temp_string, "Green Value: %d", green_test>>8);
+				SmartDashboard::PutString("DB/String 6", temp_string);
+				sprintf(temp_string, "Blue Value: %d", blue_test>>8);
+				SmartDashboard::PutString("DB/String 7", temp_string);
+				if(right_joystick.GetRawButton(RJSTK_CAPTURE_CONSTANT)){
+					sprintf(temp_string, "R%d, G%d, B%d", red_test>>8, green_test>>8, blue_test>>8);
+					SmartDashboard::PutString("DB/String 8", temp_string);
+					comparison_constant = green_test;
+					// TODO: store comparison_constant (or RGB) to file/
+					//(only store once for each button press)
+					comparison_constant_set = true;
+				}
+			}
+		}
+
+		red_test= 0;
+		green_test= 0;
+		blue_test= 0;
+	}
+
+	//determines the difference between two cycle images.
+	//positive if ball entered frame, 0 if no change (), negative if ball left frame
+	int BallChange(int current_cycle, int prev_cycle)
+	{
+		if((current_cycle - prev_cycle) < IMAGE_THRESHOLD_VALUE){//originally 71600
+			return 0;
+		}
+		return prev_cycle - current_cycle;
+	}
+
+	void  ArcadeDrive4470(float move_value, float rotate_value, float *left_wheel_speed,
+			float *right_wheel_speed, bool squared_inputs)
+	{
+		// local variables to hold the computed PWM values for the motors
+		move_value = Limit(move_value);
+		rotate_value = Limit(rotate_value);
+		if (squared_inputs) { // square the inputs (while preserving the sign) to
+			//increase fine control while permitting full power
+			if (move_value >= 0.0){
+				move_value = (move_value * move_value);
+			} else {
+				move_value = -(move_value * move_value);
+			}
+			if (rotate_value >= 0.0)	{
+				rotate_value = (rotate_value * rotate_value);
+			} else {
+				rotate_value = -(rotate_value * rotate_value);
+			}
+		}
+		if (move_value > 0.0) {
+			if (rotate_value > 0.0) {
+				*left_wheel_speed = move_value - rotate_value;
+				*right_wheel_speed = Max(move_value, rotate_value);
+			} else {
+				*left_wheel_speed = Max(move_value, -rotate_value);
+				*right_wheel_speed = move_value + rotate_value;
+			}
+		} else {
+			if (rotate_value > 0.0) {
+				*left_wheel_speed = -Max(-move_value, rotate_value);
+				*right_wheel_speed = move_value + rotate_value;
+			} else {
+				*left_wheel_speed = move_value - rotate_value;
+				*right_wheel_speed = -Max(-move_value, -rotate_value);
+			}
+			if(reverse_direction == REVERSE_DIRECTION_DIR_REVERSED) {
+				float temp = *left_wheel_speed;
+				*left_wheel_speed = *right_wheel_speed;
+				*right_wheel_speed = temp;
+			}
+		}
+	} //ArcadeDrive4470
+
+	void  TankDrive4470(float rgt_jystk_val, float lft_jystk_val, float *left_wheel_speed,
+			float *right_wheel_speed, bool squared_inputs)
+	{
+		if (squared_inputs) { // square the inputs (while preserving the sign) to increase fine control while permitting full power
+			if (lft_jystk_val >= 0.0) {
+				lft_jystk_val = (lft_jystk_val * lft_jystk_val);
+			} else {
+				lft_jystk_val = -(lft_jystk_val * lft_jystk_val);
+			}
+			if (rgt_jystk_val >= 0.0) {
+				rgt_jystk_val = (rgt_jystk_val * rgt_jystk_val);
+			} else {
+				rgt_jystk_val = -(rgt_jystk_val * rgt_jystk_val);
+			}
+		}
+		*left_wheel_speed = lft_jystk_val;
+		*right_wheel_speed = rgt_jystk_val;
+		if(reverse_direction == -1) {
+			float temp = *left_wheel_speed;
+			*left_wheel_speed = *right_wheel_speed;
+			*right_wheel_speed = temp;
+		}
+	} //TankDrive4470
+
+
+	float Limit(float num) {
+		if(num > MAX_MOTOR_POWER) {
+			return MAX_MOTOR_POWER;
+		}
+		if (num < -MAX_MOTOR_POWER) {
+			return -MAX_MOTOR_POWER;
+		}
+		return num;
+	} //Limit
+
+	float Max(float num1, float num2)
+	{
+		return (num1<num2)?num2:num1;
+	} //Max
+
+	void MaintainPosition(int left_maintain_value, int right_maintain_value,
+			int left_current_value, int right_current_value, float *left_power, float *right_power)
+	{
+
+		if(abs(left_current_value-left_maintain_value) > ENCODER_MAINTAIN_BUFFER ) {
+			*left_power = (LEFT_ENCODER_DIRECTION) *
+					(left_current_value - left_maintain_value) * (LEFT_PROPORTIONAL_CONSTANT);
+			if(*left_power > MAX_POWER) {
+				*left_power = MAX_POWER;
+			}
+			if(*left_power<MIN_POWER) {
+				*left_power = MIN_POWER;
+			}
+		}
+		if(abs(right_current_value - right_maintain_value) > ENCODER_MAINTAIN_BUFFER) {
+			*right_power = (RIGHT_ENCODER_DIRECTION) *
+					(right_current_value - right_maintain_value) * (RIGHT_PROPORTIONAL_CONSTANT);
+			if(*right_power > MAX_POWER) {
+				*right_power = MAX_POWER;
+			}
+			if(*right_power < MIN_POWER) {
+				*right_power = MIN_POWER;
+			}
+		}
+		prev_left_encoder_value = left_current_value;
+		prev_right_encoder_value = right_current_value;
+	} //MaintainPosition
+
+	void DriveForward()
+	{
+		switch(auto_state) {
+		//pirate
+		case AUTONOMOUS_START_DRIVING_FORWARD:
+			left_autonomous_motor_power = LEFT_AUTONOMOUS_DRIVE_POWER;
+			right_autonomous_motor_power = RIGHT_AUTONOMOUS_DRIVE_POWER;
+			if(switch_box.GetRawButton(SBOX_AUTO_HIGH_POWER)) {
+				left_autonomous_motor_power += LEFT_AUTONOMOUS_DRIVE_POWER_INCREASE;
+				right_autonomous_motor_power += RIGHT_AUTONOMOUS_DRIVE_POWER_INCREASE;
+			}
+			timer_starting_position = timer.Get();
+			auto_state++;
+			break;
+		case AUTONOMOUS_DRIVE_FORWARD_STATE:
+			if(!switch_box.GetRawButton(SBOX_AUTO_HIGH_POWER)) {
+				auto_state++;
+			}
+			if((timer.Get() - timer_starting_position) >= AUTONOMOUS_DRIVE_TIME) {
+				left_autonomous_motor_power = MOTOR_UNPOWERED;
+				right_autonomous_motor_power = MOTOR_UNPOWERED;
+			}
+			break;
+		case AUTONOMOUS_DRIVE_FORWARD_LONGER_STATE:
+			if((timer.Get() - timer_starting_position) >= AUTONOMOUS_DRIVE_TIME + AUTONOMOUS_TIME_INCREASE) {
+				left_autonomous_motor_power = MOTOR_UNPOWERED;
+				right_autonomous_motor_power = MOTOR_UNPOWERED;
+			}
+			break;
+		default:
+			left_autonomous_motor_power = MOTOR_UNPOWERED;
+			right_autonomous_motor_power = MOTOR_UNPOWERED;
+			break;
+		}
+	} //DriveForward
+
+	int detectBoulder(AnalogInput sensor, int threshhold)
+	{
+		return (sensor.GetValue() >= threshhold)?1:0;
+	}
+};
+START_ROBOT_CLASS(Robot)

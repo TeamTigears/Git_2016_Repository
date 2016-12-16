@@ -1,0 +1,599 @@
+19:55:04 **** Clean-only build of configuration Debug for project Gwyn_Camera_Source ****
+rm -rf src/Robot.d src/Robot.o FRCUserProgram 
+Cannot run program "rm": Launching failed
+
+Error: Program "rm" not found in PATH
+PATH=[\usr\local\bin;C:/Program Files/Java/jre1.8.0_91/bin/server;C:/Program Files/Java/jre1.8.0_91/bin;C:/Program Files/Java/jre1.8.0_91/lib/amd64;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\frc\bin;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files\eclipse]
+
+19:55:04 **** Clean-only build of configuration Debug for project Gwyn_Camera_Source ****
+19:55:07 **** Rebuild of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+15:14:17 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+15:56:39 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'int Robot::GetSpeedStartPoint(float, int)':
+..\src\Robot.cpp:600:2: error: expected primary-expression before '}' token
+  }
+  ^
+..\src\Robot.cpp:600:2: warning: control reaches end of non-void function [-Wreturn-type]
+  }
+  ^
+15:58:00 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+16:03:32 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+16:09:03 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+16:17:44 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+16:28:20 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+16:32:48 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+16:39:04 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+16:45:15 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+16:48:56 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+16:53:26 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+17:04:19 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+17:09:38 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+17:18:30 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+17:53:34 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\kepler/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\kepler/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+15:38:38 **** Rebuild of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+15:40:14 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+15:41:39 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+15:47:02 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:443:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+18:10:19 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'void Robot::AutomaticBallDetection()':
+..\src\Robot.cpp:682:22: error: 'vis_image' was not declared in this scope
+     imaqGetImageInfo(vis_image, vis_info);
+                      ^
+..\src\Robot.cpp:697:7: error: 'blue_test' was not declared in this scope
+       blue_test += *print;
+       ^
+..\src\Robot.cpp:705:7: error: 'green_test' was not declared in this scope
+       green_test += *print;
+       ^
+..\src\Robot.cpp:711:7: error: 'red_test' was not declared in this scope
+       red_test += *print;
+       ^
+..\src\Robot.cpp:731:31: error: 'green_test' was not declared in this scope
+      prev_change = BallChange(green_test, comparison_constant);
+                               ^
+..\src\Robot.cpp:758:5: error: 'prev_pixel_count' was not declared in this scope
+     prev_pixel_count = green_test;
+     ^
+..\src\Robot.cpp:758:24: error: 'green_test' was not declared in this scope
+     prev_pixel_count = green_test;
+                        ^
+..\src\Robot.cpp:762:43: error: 'red_test' was not declared in this scope
+     sprintf(temp_string, "Red Value: %d", red_test>>8);
+                                           ^
+..\src\Robot.cpp:766:44: error: 'blue_test' was not declared in this scope
+     sprintf(temp_string, "Blue Value: %d", blue_test>>8);
+                                            ^
+..\src\Robot.cpp:779:3: error: 'red_test' was not declared in this scope
+   red_test= 0;
+   ^
+..\src\Robot.cpp:780:3: error: 'green_test' was not declared in this scope
+   green_test= 0;
+   ^
+..\src\Robot.cpp:781:3: error: 'blue_test' was not declared in this scope
+   blue_test= 0;
+   ^
+18:11:36 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:444:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+20:55:43 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:444:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+18:27:54 **** Rebuild of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In constructor 'Robot::Robot()':
+..\src\Robot.cpp:327:69: error: expression list treated as compound expression in mem-initializer [-fpermissive]
+   ring_light_I2C_connection(I2C::kOnboard, RINGLIGHT_I2C_DEVICE_ADDR){
+                                                                     ^
+..\src\Robot.cpp:327:69: warning: left operand of comma operator has no effect [-Wunused-value]
+..\src\Robot.cpp:327:69: error: invalid conversion from 'int' to 'I2C*' [-fpermissive]
+18:28:25 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In constructor 'Robot::Robot()':
+..\src\Robot.cpp:327:3: error: expected identifier before '*' token
+   *ring_light_I2C_connection(I2C::kOnboard, RINGLIGHT_I2C_DEVICE_ADDR){
+   ^
+..\src\Robot.cpp:327:3: error: expected '{' before '*' token
+18:28:38 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In constructor 'Robot::Robot()':
+..\src\Robot.cpp:327:3: error: expected identifier before '&' token
+   &ring_light_I2C_connection(I2C::kOnboard, RINGLIGHT_I2C_DEVICE_ADDR){
+   ^
+..\src\Robot.cpp:327:3: error: expected '{' before '&' token
+18:28:45 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In constructor 'Robot::Robot()':
+..\src\Robot.cpp:327:69: error: expression list treated as compound expression in mem-initializer [-fpermissive]
+   ring_light_I2C_connection(I2C::kOnboard, RINGLIGHT_I2C_DEVICE_ADDR){
+                                                                     ^
+..\src\Robot.cpp:327:69: warning: left operand of comma operator has no effect [-Wunused-value]
+..\src\Robot.cpp:327:69: error: invalid conversion from 'int' to 'I2C*' [-fpermissive]
+18:30:47 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:449:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+20:11:09 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopPeriodic()':
+..\src\Robot.cpp:454:73: error: 'RED_REGISTER' was not declared in this scope
+   printf("I2C Write abort?(red): %d\n",ring_light_I2C_connection->Write(RED_REGISTER,0x55));
+                                                                         ^
+..\src\Robot.cpp:455:75: error: 'GRN_REGISTER' was not declared in this scope
+   printf("I2C Write abort?(green): %d\n",ring_light_I2C_connection->Write(GRN_REGISTER,0x55));
+                                                                           ^
+..\src\Robot.cpp:456:74: error: 'BLU_REGISTER' was not declared in this scope
+   printf("I2C Write abort?(blue): %d\n",ring_light_I2C_connection->Write(BLU_REGISTER,0x55));
+                                                                          ^
+20:11:30 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+16:36:16 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+19:49:14 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopPeriodic()':
+..\src\Robot.cpp:456:3: error: 'ic2_status' was not declared in this scope
+   ic2_status = ring_light_I2C_connection->WriteBulk(i2c_data,4);
+   ^
+..\src\Robot.cpp:452:8: warning: unused variable 'i2c_status' [-Wunused-variable]
+   bool i2c_status;
+        ^
+19:49:59 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopPeriodic()':
+..\src\Robot.cpp:452:8: warning: variable 'i2c_status' set but not used [-Wunused-but-set-variable]
+   bool i2c_status;
+        ^
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+19:52:42 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+17:52:36 **** Rebuild of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+17:53:55 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopPeriodic()':
+..\src\Robot.cpp:459:38: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint8_t** {aka unsigned char**}' [-Wformat=]
+   printf("I2C Read value?:%d\n", &dat);
+                                      ^
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+17:55:34 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopPeriodic()':
+..\src\Robot.cpp:459:37: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint8_t* {aka unsigned char*}' [-Wformat=]
+   printf("I2C Read value?:%d\n", dat);
+                                     ^
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+17:57:51 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+18:00:49 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+18:25:55 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopPeriodic()':
+..\src\Robot.cpp:459:37: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint8_t* {aka unsigned char*}' [-Wformat=]
+   printf("I2C Read value?:%d\n", dat);
+                                     ^
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+18:26:37 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+20:04:22 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+20:11:20 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+20:20:44 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopPeriodic()':
+..\src\Robot.cpp:454:12: warning: unused variable 'dat' [-Wunused-variable]
+   uint8_t *dat = 0;
+            ^
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+20:23:06 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+20:24:59 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+20:27:45 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+20:28:07 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
+20:29:04 **** Incremental Build of configuration Debug for project Gwyn_Camera_Source ****
+Info: Internal Builder is used for build
+arm-frc-linux-gnueabi-g++ -std=c++1y "-IC:\\Users\\leibniz/wpilib/cpp/current/include" "-IC:\\frc-software-development\\Gwyn_ColorImage\\Gwyn_Camera_Source\\src" -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\Robot.o" "..\\src\\Robot.cpp" 
+..\src\Robot.cpp: In member function 'virtual void Robot::TeleopInit()':
+..\src\Robot.cpp:446:55: warning: 'substr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   comparison_constant = strtol(substr, &substr_end, 10);
+                                                       ^
+arm-frc-linux-gnueabi-g++ "-LC:\\Users\\leibniz/wpilib/cpp/current/lib" -Wl,-rpath,/opt/GenICam_v2_3/bin/Linux_armv7-a,-rpath,/usr/local/frc/rpath-lib -o FRCUserProgram "src\\Robot.o" -lwpi 
+Info: Nothing to build for Gwyn_Camera_Source
+Info: Nothing to build for Gwyn_Camera_Source
